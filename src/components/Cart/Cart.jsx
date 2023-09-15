@@ -10,7 +10,7 @@ const Cart = ({cardInfo, addHours, addNumber, addRimaing}) => {
                 <h1 className="text-xl font-bold my-3">Course Name</h1>
                 <ol className="list-decimal pl-4">
                     {
-                        cardInfo.map(card => <li>{card.title}</li>)
+                        cardInfo.map((card, idx) => <li key={idx}>{card.title}</li>)
                     }
                 </ol>
                 <hr className="my-3" />
