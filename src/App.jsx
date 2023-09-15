@@ -20,26 +20,42 @@ function App() {
 
   const handleButtonClick = (card, credit, price) => {
     const newData = [...cardInfo, card];
-    const similarData = cardInfo.find(data => data.id === card.id)
+    const similarData = cardInfo.find(data => data.id === card.id);
+
     if (similarData) {
       return
     }
-    else {
-      
-      if (addHours >= 20) {
-        return alert('not exist')
-      }
 
-      if(addRimaing <= 0){
-        return alert('sorry')
+    else {
+      addHour(credit)
+      addRemings(credit)
+
+      if(addHours > 20){
+        return
       }
-      else {
-        setAddHours(addHours + credit);
+      else{
         setAddNumber(addNumber + price)
-        setAddRimaing(addRimaing - credit)
         setCardInfo(newData);
       }
+
+   
     }
+  }
+
+  const addHour = (credit) => {
+    const newHourse = addHours + credit;
+    if (newHourse > 20) {
+      return
+    }
+    setAddHours(newHourse)
+  }
+
+  const addRemings = (credit) => {
+    const newRemaining = addRimaing - credit;
+    if (newRemaining < 0) {
+      return
+    }
+    setAddRimaing(newRemaining);
   }
 
 
