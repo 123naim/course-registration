@@ -8,10 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [cardsData, setCardData] = useState([]);
-  const [cartInfo, setCardInfo] = useState([]);
+  const [cartInfo, setCartInfo] = useState([]);
   const [addHours, setAddHours] = useState(0);
-  const [addNumber, setAddNumber] = useState(0);
   const [addRimaing, setAddRimaing] = useState(20);
+  const [addNumber, setAddNumber] = useState(0);
 
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function App() {
       setAddHours(hour)
       addRemings(credit)
       setAddNumber(addNumber + price)
-      setCardInfo(newData);
+      setCartInfo(newData);
     }
   }
 
@@ -55,7 +55,7 @@ function App() {
   const addRemings = (credit) => {
     const newRemaining = addRimaing - credit;
     if (newRemaining < 0) {
-      return
+      return;
     }
     setAddRimaing(newRemaining);
   }
