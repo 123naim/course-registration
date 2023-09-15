@@ -8,66 +8,48 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [cardsData, setCardData] = useState([]);
-  const [cardInfo, setCardInfo] = useState([]);
+  const [cartInfo, setCardInfo] = useState([]);
   const [addHours, setAddHours] = useState(0);
   const [addNumber, setAddNumber] = useState(0);
   const [addRimaing, setAddRimaing] = useState(20);
 
 
   useEffect(() => {
-    fetch('/fake-data.json')
+    fetch('/data.json')
       .then(res => res.json())
       .then(data => setCardData(data))
   }, [])
 
   // click btn
   const handleButtonClick = (card, credit, price) => {
-    const newData = [...cardInfo, card];
-    const similarData = cardInfo.find(data => data.id === card.id);
+    const newData = [...cartInfo, card];
+    const similarData = cartInfo.find(data => data.id === card.id);
 
     let hour = credit;
 
     if (similarData) {
       const handleSimilarData = () => {
-        toast.warn("this is alrady exits")
+        toast.warn("this is alrady exist")
       }
-      return handleSimilarData;
+      return handleSimilarData();
     }
-
     else {
-      cardInfo.forEach(item => {
-      hour += item.credit;
-    })
+      cartInfo.forEach(item => {
+        hour += item.credit;
+      })
 
-    if(hour > 20){
-      return
-    }
-    setAddHours(hour)
-    addRemings(credit)
-    setAddNumber(addNumber + price)
-    setCardInfo(newData);
+      if (hour > 20) {
+        const handleSimilarData = () => {
+          toast.warn("Sorry!!! Limited Hours")
+        }
+        return handleSimilarData();
+      }
+      setAddHours(hour)
+      addRemings(credit)
+      setAddNumber(addNumber + price)
+      setCardInfo(newData);
     }
   }
-
-
-
-  // add Hours
-  // const addHour = (card) => {
-  //   let hour = card.credit;
-  //   cardsData.forEach(item => {
-  //     hour = hour + item.credit;
-  //   })
-    // console.log(hour)
-    // let hour = credit;
-    // hour = hour + credit;
-    // console.log(hour)
-    // const newHourse = addHours + credit;
-    // if (hour > 20) {
-    //   return
-    // }
-    // setAddHours(newHourse)
-  // }
-
 
   // Hours Remaining
   const addRemings = (credit) => {
@@ -83,8 +65,8 @@ function App() {
     <div className='bg-gray-200'>
       <ToastContainer></ToastContainer>
       <h1 className='text-center pt-9 py-6 text-4xl font-bold'>Course Registration</h1>
-      <div className='mx-12 flex justify-between gap-4'>
-        <div className='w-3/4 grid grid-cols-3 gap-4 '>
+      <div className='mx-16 lg:flex lg:flex-row flex flex-col-reverse lg:justify-between gap-5'>
+        <div className='lg:w-3/4 grid lg:grid-cols-3 md:grid-cols-2 gap-5 mx-auto'>
           {
             cardsData.map((card, idx) => <Card
               key={idx}
@@ -93,9 +75,9 @@ function App() {
             ></Card>)
           }
         </div>
-        <div className='w-1/4'>
+        <div className='lg:w-1/4 md:w-8/12 mx-auto'>
           <Cart
-            cardInfo={cardInfo}
+            cartInfo={cartInfo}
             addHours={addHours}
             addNumber={addNumber}
             addRimaing={addRimaing}

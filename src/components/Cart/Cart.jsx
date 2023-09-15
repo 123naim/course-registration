@@ -1,6 +1,6 @@
 import { list } from "postcss";
 
-const Cart = ({cardInfo, addHours, addNumber, addRimaing}) => {
+const Cart = ({cartInfo, addHours, addNumber, addRimaing}) => {
     
     return (
         <div className="bg-white p-3 rounded-lg">
@@ -10,14 +10,14 @@ const Cart = ({cardInfo, addHours, addNumber, addRimaing}) => {
                 <h1 className="text-xl font-bold my-3">Course Name</h1>
                 <ol className="list-decimal pl-4">
                     {
-                        cardInfo.map((card, idx) => <li key={idx}>{card.title}</li>)
+                        cartInfo.map((card, idx) => <li key={idx}>{card.title}</li>)
                     }
                 </ol>
                 <hr className="my-3" />
                 <h1 className="text-xl text-gray-600 font-semibold">Total Credit Houre: {addHours}
                 </h1>
                 <hr className="my-3" />
-                <h1 className="text-xl text-gray-600 font-semibold">Total Price: {addNumber}</h1>
+                <h1 className="text-xl text-gray-600 font-semibold">Total Price: {addNumber} USDT</h1>
             </div>
         </div>
     );
